@@ -1,2 +1,0 @@
-# untitled-game
-clicker game
