@@ -5,7 +5,7 @@ import update from 'immutability-helper';
 export const Resources = props => {
   const { fish, yarn } = props.resources;
   const {resources} = props;
-  console.log(props.resources);
+  //console.log(props.resources);
 
   return (
     <React.Fragment>

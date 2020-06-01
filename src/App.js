@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import update from "immutability-helper";
 import useLocalStorage from "./Components/LocalStorageHook";
 
 import Navbar from "./Components/Navbar";
@@ -9,10 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 export const App = () => {
-  var getTime = () => new Date().getHours() + ":" + new Date().getMinutes();
   //const [fish, setFish] = useLocalStorage("fish", 0);
   //const [yarn, setYarn] = useLocalStorage("yarn", 0);
   const [resources, setResources] = useLocalStorage("resources", {
+    txtLog: [],
     fish: {
       increment: 0,
       total: 0,
@@ -23,17 +24,35 @@ export const App = () => {
     },
   });
 
+  //function to print message to log
+  var prtLog = (message) => {
+    var d = new Date();
+    var msg = "[" + formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()) + ":" + formatTime(d.getSeconds()) + "]: " + message;
+    const addMsg = update(resources, { txtLog: { $push: [msg] } });
+    if (addMsg.txtLog.length > 5) addMsg.txtLog.shift(); //remove first element in array
+    setResources(addMsg);
+  };
+
+  useEffect(()=>{
+    prtLog("Game has loaded");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);  
+
   return (
     <React.Fragment>
       <Navbar />
       <Container>
         <Row>
           <Col>
-            <h3>Logs:</h3>
+            <h3 onClick={() => prtLog("test")}>Logs:</h3>
           </Col>
         </Row>
         <Row md={4} className="textLog">
-          <Col>[{getTime}]:</Col>
+          <Col>
+            {resources.txtLog.map((item, index) => (
+              <p className="msgLog" key={index}>{item}</p>
+            ))}
+          </Col>
         </Row>
 
         <Row>
@@ -59,6 +78,11 @@ export const App = () => {
       </Container>
     </React.Fragment>
   );
+};
+
+const formatTime = time => {
+  var newTime = ("0"+time.toString()).slice(-2);
+  return newTime;
 };
 
 export default App;
