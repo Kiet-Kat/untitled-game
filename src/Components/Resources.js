@@ -1,18 +1,26 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
+import update from 'immutability-helper';
 
 export const Resources = props => {
+  const { fish, yarn } = props.resources;
+  const {resources} = props;
+  console.log(props.resources);
+
   return (
     <div>
     <Row>
       <Col md={3}>
-        Fish: <span style={{ float: "right" }}>{props.fish}</span>
+        Fish: <span style={{ float: "right" }}>{fish.total}</span>
       </Col>
       <Col>
         <Button
           variant="secondary"
           className="btnResource"
-          onClick={() => props.setFish(props.fish + 1)}
+          onClick={() => {
+            const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
+            props.setResources(newFish);
+          }}
         >
           Gather Fish
         </Button>
@@ -20,13 +28,16 @@ export const Resources = props => {
     </Row>
     <Row style={{ paddingTop: "5px" }}>
       <Col md={3}>
-        Yarn: <span style={{ float: "right" }}>{props.yarn}</span>
+        Yarn: <span style={{ float: "right" }}>{yarn.total}</span>
       </Col>
       <Col>
         <Button
           variant="secondary"
           className="btnResource"
-          onClick={() => props.setYarn(props.yarn + 1)}
+          onClick={() => {
+            const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
+            props.setResources(newYarn);
+          }}
         >
           Make Yarn
         </Button>
