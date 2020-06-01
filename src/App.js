@@ -30,6 +30,10 @@ export const App = () => {
   });
   const [buildings, setBuildings] = useLocalStorage("buildings",
     {
+      scratchingPost:{
+        price: 5,
+        total: 0
+      },
       fishingPort:{
         price: 15,
         bought: false
@@ -39,6 +43,16 @@ export const App = () => {
         bought: false
       }
   });
+
+  const [cats, setCat] = useLocalStorage("cats", 
+  {
+    basicCat:{
+      total: 0
+    },
+    fisherCat:{
+      total: 0
+    }
+  })
 
   return (
     <Container>
@@ -55,7 +69,7 @@ export const App = () => {
       </Row>
       <Row md={4} className="secLogs" >
           <Col>
-              [{time}]: 
+              [{time}]:
           </Col>
       </Row>
 

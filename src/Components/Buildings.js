@@ -5,11 +5,35 @@ import update from 'immutability-helper';
 export const Buildings = props => {
     const { fish, yarn, cardboard } = props.resources;
     const {resources} = props;
-    const { fishingPort, barracks } = props.buildings;
+    const { fishingPort, barracks, scratchingPost } = props.buildings;
     const {buildings} = props;
 
     return (
         <div>
+            <Row>
+                <Col md={6}>
+                    Scratching Post <span style={{ float: "right" }}>{scratchingPost.total} Bought</span>
+                </Col>
+                <Col>
+                    <Button
+                        variant="secondary"
+                        className="btnBuildings"
+                        onClick={() => {
+                            console.log("Button Pressed");
+                            if( cardboard.total >= scratchingPost.price){
+                                const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total - scratchingPost.price}}});
+                                props.setResources(newCardboard);
+                                const newScratchingPost = update(buildings, {scratchingPost: {total: {$set: scratchingPost.total + 1}}})
+                                props.setBuildings(newScratchingPost);                                
+                            }else{
+                                console.log("You can't afford this");
+                            }
+                        }}
+                    >
+                        Build
+                    </Button>
+                </Col>
+            </Row>
             <Row>
                 <Col md={6}>
                     Fishing Port <span style={{ float: "right" }}>{fishingPort.price} Cardboard</span>
