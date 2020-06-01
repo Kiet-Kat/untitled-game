@@ -8,7 +8,7 @@ import Resources from "./Components/Resources";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-function App() {
+export const App = () => {
   const [fish, setFish] = useLocalStorage("fish", 0);
   const [yarn, setYarn] = useLocalStorage("yarn", 0);
 
