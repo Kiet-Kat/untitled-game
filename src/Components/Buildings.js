@@ -12,7 +12,7 @@ export const Buildings = props => {
         <div>
             <Row>
                 <Col md={6}>
-                    Fishing Port <span style={{ float: "right" }}>10 Cardboard</span>
+                    Fishing Port <span style={{ float: "right" }}>{fishingPort.price} Cardboard</span>
                 </Col>
                 <Col>
                     {!fishingPort.bought && (

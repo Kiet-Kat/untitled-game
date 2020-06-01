@@ -31,7 +31,7 @@ export const App = () => {
   const [buildings, setBuildings] = useLocalStorage("buildings",
     {
       fishingPort:{
-        price: 10,
+        price: 15,
         bought: false
       }
   });
