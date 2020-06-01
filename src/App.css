@@ -2,10 +2,19 @@
     text-align: center;
 }
 
+.textLog{
+    border: solid;
+    height: 100px;
+}
+
 .secResources{
     border: solid;
 }
 
 .btnResource{
     float: right;
+}
+
+.secCats{
+    border:solid;
 }
