@@ -3,14 +3,14 @@ import { Row, Col, Button } from "react-bootstrap";
 import update from 'immutability-helper';
 
 export const Resources = props => {
-  const { fish, yarn } = props.resources;
+  const { fish, yarn, cardboard } = props.resources;
   const {resources} = props;
   console.log(props.resources);
 
   return (
     <div>
     <Row>
-      <Col md={3}>
+      <Col md={4}>
         Fish: <span style={{ float: "right" }}>{fish.total}</span>
       </Col>
       <Col>
@@ -27,7 +27,7 @@ export const Resources = props => {
       </Col>
     </Row>
     <Row style={{ paddingTop: "5px" }}>
-      <Col md={3}>
+      <Col md={4}>
         Yarn: <span style={{ float: "right" }}>{yarn.total}</span>
       </Col>
       <Col>
@@ -40,6 +40,23 @@ export const Resources = props => {
           }}
         >
           Make Yarn
+        </Button>
+      </Col>
+    </Row>
+    <Row style={{ paddingTop: "5px" }}>
+      <Col md={4}>
+        Cardboard: <span style={{ float: "right" }}>{cardboard.total}</span>
+      </Col>
+      <Col>
+        <Button
+          variant="secondary"
+          className="btnResource"
+          onClick={() => {
+            const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
+            props.setResources(newCardboard);
+          }}
+        >
+          Collect Cardboard
         </Button>
       </Col>
     </Row>

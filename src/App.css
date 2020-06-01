@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.textLog{
+.secLogs{
     border: solid;
     height: 100px;
 }
@@ -17,4 +17,16 @@
 
 .secCats{
     border:solid;
+}
+
+.secBuildings{
+    border:solid;
+}
+
+.btnBuildings{
+    float: right;
+}
+
+.secTraining{
+    border: solid;
 }
