@@ -33,6 +33,10 @@ export const App = () => {
       fishingPort:{
         price: 15,
         bought: false
+      },
+      barracks:{
+        price: 50,
+        bought: false
       }
   });
 

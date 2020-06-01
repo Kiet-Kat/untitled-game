@@ -5,7 +5,7 @@ import update from 'immutability-helper';
 export const Buildings = props => {
     const { fish, yarn, cardboard } = props.resources;
     const {resources} = props;
-    const { fishingPort } = props.buildings;
+    const { fishingPort, barracks } = props.buildings;
     const {buildings} = props;
 
     return (
@@ -22,7 +22,7 @@ export const Buildings = props => {
                         onClick={() => {
                             console.log("Button Pressed");
                             console.log(fishingPort.bought);
-                            if( cardboard.total > fishingPort.price){
+                            if( cardboard.total >= fishingPort.price){
                                 const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total - fishingPort.price}}});
                                 props.setResources(newCardboard);
                                 const newFishingPort = update(buildings, {fishingPort: {bought: {$set: true}}})
@@ -36,6 +36,36 @@ export const Buildings = props => {
                     </Button>
                     )}
                     {fishingPort.bought && (
+                        <h2 style={{ float: "right"}}> Bought </h2>
+                    )}
+                </Col>
+            </Row>
+            <Row>
+                <Col md={6}>
+                    Barracks <span style={{ float: "right" }}>{barracks.price} Cardboard</span>
+                </Col>
+                <Col>
+                    {!barracks.bought && (
+                    <Button
+                        variant="secondary"
+                        className="btnBuildings"
+                        onClick={() => {
+                            console.log("Button Pressed");
+                            console.log(barracks.bought);
+                            if( cardboard.total >= barracks.price){
+                                const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total - barracks.price}}});
+                                props.setResources(newCardboard);
+                                const newBarracks = update(buildings, {barracks: {bought: {$set: true}}})
+                                props.setBuildings(newBarracks);
+                            }else{
+                                console.log("You can't afford this");
+                            }
+                        }}
+                    >
+                        Build
+                    </Button>
+                    )}
+                    {barracks.bought && (
                         <h2 style={{ float: "right"}}> Bought </h2>
                     )}
                 </Col>
