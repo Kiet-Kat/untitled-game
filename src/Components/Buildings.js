@@ -23,8 +23,8 @@ export const Buildings = props => {
                             if( cardboard.total >= scratchingPost.price){
                                 const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total - scratchingPost.price}}});
                                 props.setResources(newCardboard);
-                                const newScratchingPost = update(buildings, {scratchingPost: {total: {$set: scratchingPost.total + 1}}})
-                                props.setBuildings(newScratchingPost);                                
+                                const newScratchingPost = update(buildings, {scratchingPost: {total: {$set: scratchingPost.total + 1}}});
+                                props.setBuildings(newScratchingPost);                       
                             }else{
                                 console.log("You can't afford this");
                             }

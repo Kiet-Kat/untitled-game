@@ -43,17 +43,7 @@ export const App = () => {
         bought: false
       }
   });
-
-  const [cats, setCat] = useLocalStorage("cats", 
-  {
-    basicCat:{
-      total: 0
-    },
-    fisherCat:{
-      total: 0
-    }
-  })
-
+  
   return (
     <Container>
       <Row>
