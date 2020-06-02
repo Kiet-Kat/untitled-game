@@ -6,6 +6,7 @@ import useLocalStorage from "./Components/LocalStorageHook";
 import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
 import Buildings from "./Components/Buildings";
+import {IncrementLogic} from "./Components/IncrementLogic";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -52,7 +53,13 @@ export const App = () => {
     setResources(addMsg);
   };
 
+  //function activates when elements have rendered
   useEffect(()=>{
+    window.addEventListener("beforeunload", e =>{
+      e.preventDefault();
+      clearInterval();
+    });
+    window.setInterval(IncrementLogic(resources, setResources),1000);
     prtLog("Game has loaded");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);  
