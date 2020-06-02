@@ -49,8 +49,8 @@ export const App = () => {
         </Row>
         <Row md={4} className="textLog">
           <Col>
-            {resources.txtLog.map((item, index) => (
-              <p className="msgLog" key={index}>{item}</p>
+            {[...resources.txtLog].reverse().map((item, index) => (
+              <p className={"msgLog"} id={"msgLog"+index} key={index}>{item}</p>
             ))}
           </Col>
         </Row>

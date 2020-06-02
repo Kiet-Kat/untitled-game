@@ -103,3 +103,15 @@ a{
 .msgLog{
     margin: -5px auto;
 }
+#msgLog1{
+    opacity: 0.8;
+}
+#msgLog2{
+    opacity: 0.6;
+}
+#msgLog3{
+    opacity: 0.4;
+}
+#msgLog4{
+    opacity: 0.2;
+}
