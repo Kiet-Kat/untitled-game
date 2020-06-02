@@ -5,13 +5,12 @@ import useLocalStorage from "./Components/LocalStorageHook";
 
 import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
+import Buildings from "./Components/Buildings";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 export const App = () => {
-  //const [fish, setFish] = useLocalStorage("fish", 0);
-  //const [yarn, setYarn] = useLocalStorage("yarn", 0);
   const [resources, setResources] = useLocalStorage("resources", {
     txtLog: [],
     fish: {
@@ -22,6 +21,26 @@ export const App = () => {
       increment: 0,
       total: 0,
     },
+      cardboard: {
+        increment: 0,
+        total: 0
+      }
+  });
+  
+  const [buildings, setBuildings] = useLocalStorage("buildings",
+    {
+      scratchingPost:{
+        price: 5,
+        total: 0
+      },
+      fishingPort:{
+        price: 15,
+        bought: false
+      },
+      barracks:{
+        price: 50,
+        bought: false
+      }
   });
 
   //function to print message to log
@@ -70,12 +89,33 @@ export const App = () => {
           </Col>
 
           <Col md={2}></Col>
+        <Col md={5} className="secCats">
+          PLACEHOLDER
+        </Col>
+      </Row>
 
-          <Col md={5} className="secCats">
-            PLACEHOLDER
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col md={7}>
+          <h3>Buildings:</h3>
+        </Col>
+        <Col>
+          <h3>Training:</h3>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col md={5} className="secBuildings">
+          <Buildings resources={resources} setResources={setResources} buildings={buildings} setBuildings={setBuildings}/>
+        </Col>
+
+        <Col md={2}></Col>
+
+        <Col md={5} className="secTraining">
+          PLACEHOLDER
+        </Col>
+      </Row>
+
+    </Container>
     </React.Fragment>
   );
 };

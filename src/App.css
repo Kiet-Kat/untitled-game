@@ -84,7 +84,7 @@ a{
     text-align: center;
 }
 
-.textLog{
+.secLogs{
     border: solid;
     height: 100px;
 }
@@ -100,6 +100,18 @@ a{
 .secCats{
     border:solid;
 }
+
+.secBuildings{
+    border:solid;
+}
+
+.btnBuildings{
+    float: right;
+}
+
+.secTraining{
+    border: solid;
+  
 .msgLog{
     margin: -5px auto;
 }
