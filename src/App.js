@@ -1,70 +1,88 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import useLocalStorage from "./Components/LocalStorageHook"
+import update from "immutability-helper";
+import useLocalStorage from "./Components/LocalStorageHook";
 
-import Header from "./Components/Header";
+import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 export const App = () => {
-  var time = new Date().getHours() + ':' + new Date().getMinutes();
   //const [fish, setFish] = useLocalStorage("fish", 0);
   //const [yarn, setYarn] = useLocalStorage("yarn", 0);
-  const [resources, setResources] = useLocalStorage("resources",
-    {
-      fish: {
-        increment: 0,
-        total: 0
-      },
-      yarn: {
-        increment: 0,
-        total: 0
-      }
+  const [resources, setResources] = useLocalStorage("resources", {
+    txtLog: [],
+    fish: {
+      increment: 0,
+      total: 0,
+    },
+    yarn: {
+      increment: 0,
+      total: 0,
+    },
   });
 
+  //function to print message to log
+  var prtLog = (message) => {
+    var d = new Date();
+    var msg = "[" + formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()) + ":" + formatTime(d.getSeconds()) + "]: " + message;
+    const addMsg = update(resources, { txtLog: { $push: [msg] } });
+    if (addMsg.txtLog.length > 5) addMsg.txtLog.shift(); //remove first element in array
+    setResources(addMsg);
+  };
+
+  useEffect(()=>{
+    prtLog("Game has loaded");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);  
+
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Header />
-        </Col>
-        
-      </Row>
-      <Row>
-        <Col >
-          <h3>Logs:</h3>
-        </Col>
-      </Row>
-      <Row md={4} className="textLog" >
+    <React.Fragment>
+      <Navbar />
+      <Container>
+        <Row>
           <Col>
-              [{time}]: 
+            <h3 onClick={() => prtLog("test")}>Logs:</h3>
           </Col>
-      </Row>
+        </Row>
+        <Row md={4} className="textLog">
+          <Col>
+            {[...resources.txtLog].reverse().map((item, index) => (
+              <p className={"msgLog"} id={"msgLog"+index} key={index}>{item}</p>
+            ))}
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md={7}>
-          <h3>Resources:</h3>
-        </Col>
-        <Col>
-          <h3>Cats:</h3>
-        </Col>
-      </Row>
+        <Row>
+          <Col md={7}>
+            <h3>Resources:</h3>
+          </Col>
+          <Col>
+            <h3>Cats:</h3>
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md={5} className="secResources">
-          <Resources resources={resources} setResources={setResources} />
-        </Col>
+        <Row>
+          <Col md={5} className="secResources">
+            <Resources resources={resources} setResources={setResources} />
+          </Col>
 
-        <Col md={2}></Col>
+          <Col md={2}></Col>
 
-        <Col md={5} className="secCats">
-          PLACEHOLDER
-        </Col>
-      </Row>
-    </Container>
+          <Col md={5} className="secCats">
+            PLACEHOLDER
+          </Col>
+        </Row>
+      </Container>
+    </React.Fragment>
   );
-}
+};
+
+const formatTime = time => {
+  var newTime = ("0"+time.toString()).slice(-2);
+  return newTime;
+};
 
 export default App;

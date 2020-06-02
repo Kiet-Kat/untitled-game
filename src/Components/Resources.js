@@ -5,10 +5,10 @@ import update from 'immutability-helper';
 export const Resources = props => {
   const { fish, yarn } = props.resources;
   const {resources} = props;
-  console.log(props.resources);
+  //console.log(props.resources);
 
   return (
-    <div>
+    <React.Fragment>
     <Row>
       <Col md={3}>
         Fish: <span style={{ float: "right" }}>{fish.total}</span>
@@ -43,7 +43,7 @@ export const Resources = props => {
         </Button>
       </Col>
     </Row>
-  </div>
+  </React.Fragment>
   )
 }
 
