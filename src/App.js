@@ -13,9 +13,8 @@ import "./App.css";
 
 export const App = () => {
   const [resources, setResources] = useLocalStorage("resources", {
-    txtLog: [],
     fish: {
-      increment: 0,
+      increment: 1,
       total: 0,
     },
     yarn: {
@@ -25,7 +24,8 @@ export const App = () => {
       cardboard: {
         increment: 0,
         total: 0
-      }
+      },
+      txtLog: [],
   });
   
   const [buildings, setBuildings] = useLocalStorage("buildings",
@@ -53,16 +53,13 @@ export const App = () => {
     setResources(addMsg);
   };
 
-  //function activates when elements have rendered
-  useEffect(()=>{
+  //stop increment on window close
     window.addEventListener("beforeunload", e =>{
-      e.preventDefault();
-      clearInterval();
+      clearInterval(interval);
     });
-    window.setInterval(IncrementLogic(resources, setResources),1000);
-    prtLog("Game has loaded");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);  
+
+  //run increment every second
+  const interval = window.setInterval(()=>IncrementLogic(resources, setResources), 5000);;
 
   return (
     <React.Fragment>
