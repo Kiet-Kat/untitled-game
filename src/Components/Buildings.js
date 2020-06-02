@@ -36,8 +36,9 @@ export const Buildings = (props) => {
                 });
                 newScratchingPost.scratchingPost.price += 5;
                 props.setBuildings(newScratchingPost);
+                props.prtLog("You have bought a scratching pole");
               } else {
-                console.log("You can't afford this");
+                props.prtLog("You can't afford a scratching pole");
               }
             }}
           >
@@ -72,8 +73,9 @@ export const Buildings = (props) => {
                     fishingPort: { bought: { $set: true } },
                   });
                   props.setBuildings(newFishingPort);
+                  props.prtLog("You have bought the fishing post");
                 } else {
-                  console.log("You can't afford this");
+                  props.prtLog("You can't afford the fishing port");
                 }
               }}
             >
@@ -84,11 +86,12 @@ export const Buildings = (props) => {
         </Col>
       </Row>
       <Row>
-        <Col md={6}>
+        <Col md={5}>
           Barracks{" "}
-          <span style={{ float: "right" }}>{barracks.price} Cardboard</span>
+          <span style={{ float: "right" }}>{barracks.price}</span>
         </Col>
         <Col>
+          <span style={{ float: "left" }}>Cardboard</span>
           {!barracks.bought && (
             <Button
               variant="secondary"
@@ -109,8 +112,9 @@ export const Buildings = (props) => {
                     barracks: { bought: { $set: true } },
                   });
                   props.setBuildings(newBarracks);
+                  props.prtLog("You have bought the barracks");
                 } else {
-                  console.log("You can't afford this");
+                  props.prtLog("You can't afford the barracks");
                 }
               }}
             >

@@ -66,7 +66,7 @@ export const App = () => {
             <h3 onClick={() => prtLog("test")}>Logs:</h3>
           </Col>
         </Row>
-        <Row md={4} className="textLog">
+        <Row className="textLog">
           <Col>
             {[...resources.txtLog].reverse().map((item, index) => (
               <p className={"msgLog"} id={"msgLog"+index} key={index}>{item}</p>
@@ -105,7 +105,7 @@ export const App = () => {
 
       <Row>
         <Col md={5} className="secBuildings">
-          <Buildings resources={resources} setResources={setResources} buildings={buildings} setBuildings={setBuildings}/>
+          <Buildings resources={resources} setResources={setResources} buildings={buildings} setBuildings={setBuildings} prtLog={prtLog}/>
         </Col>
 
         <Col md={2}></Col>
