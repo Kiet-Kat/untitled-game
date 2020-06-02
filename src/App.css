@@ -84,7 +84,7 @@ a{
     text-align: center;
 }
 
-.secLogs{
+.textLog{
     border: solid;
     height: 100px;
 }
@@ -111,7 +111,7 @@ a{
 
 .secTraining{
     border: solid;
-  
+}
 .msgLog{
     margin: -5px auto;
 }
