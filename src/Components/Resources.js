@@ -3,8 +3,8 @@ import { Row, Col, Button } from "react-bootstrap";
 import update from 'immutability-helper';
 
 export const Resources = props => {
-  const { fish, yarn, cardboard } = props.localResource;
-  const {localResource, setResources} = props;
+  const { fish, yarn, cardboard } = props.resources;
+  const {resources} = props;
   //console.log(props.resources);
 
   return (
@@ -18,8 +18,12 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            fish.total++;
-            setResources(localResource);
+            // const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
+            // props.setResources(newFish);
+            props.setResources(currentFish=>{
+              currentFish.fish.total++;
+              return currentFish;
+            });
           }}
         >
           Gather Fish
@@ -35,8 +39,12 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            yarn.total++;
-            setResources(localResource);
+            // const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
+            // props.setResources(newYarn);
+            props.setResources(currentYarn=>{
+              currentYarn.yarn.total++;
+              return currentYarn;
+            });
           }}
         >
           Make Yarn
@@ -52,8 +60,12 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            cardboard.total++;
-            setResources(localResource);
+            // const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
+            // props.setResources(newCardboard);
+            props.setResources(currentCardboard=>{
+              currentCardboard.cardboard.total++;
+              return currentCardboard;
+            });
           }}
         >
           Collect Cardboard

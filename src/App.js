@@ -6,14 +6,13 @@ import useLocalStorage from "./Components/LocalStorageHook";
 import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
 import Buildings from "./Components/Buildings";
-import {IncrementLogic} from "./Components/IncrementLogic";
+import {IncrementLogic} from './Components/IncrementLogic';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 export const App = () => {
-  const localStorage = window.localStorage.getItem("resources");
-  var localResource = localStorage ? JSON.parse(localStorage) : {
+  const [resources, setResources] = useLocalStorage("resources", {
     fish: {
       increment: 1,
       total: 0,
@@ -27,9 +26,7 @@ export const App = () => {
         total: 0
       },
       txtLog: [],
-  };
-  
-  const [resources, setResources] = useLocalStorage("resources", localResource);
+  });
   
   const [buildings, setBuildings] = useLocalStorage("buildings",
     {
@@ -51,22 +48,19 @@ export const App = () => {
   var prtLog = (message) => {
     var d = new Date();
     var msg = "[" + formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()) + ":" + formatTime(d.getSeconds()) + "]: " + message;
-    localResource.txtLog.push(msg);
-    if (localResource.txtLog.length > 5) localResource.txtLog.shift(); //remove first element in array
-    setResources(localResource);
+    const addMsg = update(resources, { txtLog: { $push: [msg] } });
+    if (addMsg.txtLog.length > 5) addMsg.txtLog.shift(); //remove first element in array
+    setResources(addMsg);
   };
 
-  useEffect(() =>{
-    //update local storage every second
+  useEffect(()=>{
+    prtLog("Game has loaded");
     const interval = setInterval(()=>{
-      IncrementLogic();
-      // setResources(localResource);
-    }, 1000);
-
-    //stop increment on component unload
-    return () => clearInterval(interval);
+      IncrementLogic(resources, setResources);
+    },1000);
+    return ()=> clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[]);  
 
   return (
     <React.Fragment>
@@ -79,7 +73,7 @@ export const App = () => {
         </Row>
         <Row className="textLog">
           <Col>
-            {[...localResource.txtLog].reverse().map((item, index) => (
+            {[...resources.txtLog].reverse().map((item, index) => (
               <p className={"msgLog"} id={"msgLog"+index} key={index}>{item}</p>
             ))}
           </Col>
@@ -96,7 +90,7 @@ export const App = () => {
 
         <Row>
           <Col md={5} className="secResources">
-            <Resources localResource={localResource} setResources={setResources} />
+            <Resources resources={resources} setResources={setResources} />
           </Col>
 
           <Col md={2}></Col>
