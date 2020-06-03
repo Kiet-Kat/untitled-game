@@ -3,10 +3,8 @@ import { Row, Col, Button } from "react-bootstrap";
 import update from "immutability-helper";
 
 export const Buildings = (props) => {
-  const { fish, yarn, cardboard } = props.resources;
-  const { resources } = props;
-  const { fishingPort, barracks, scratchingPost } = props.buildings;
-  const { buildings } = props;
+  const { fish, yarn, cardboard, fishingPort, barracks, scratchingPost } = props.resources;
+  const { setResources } = props.setResources;
 
   return (
     <div>
@@ -22,20 +20,12 @@ export const Buildings = (props) => {
             className="btnBuildings"
             onClick={() => {
               console.log("Button Pressed");
-              if (cardboard.total >= scratchingPost.price) {
-                const newCardboard = update(resources, {
-                  cardboard: {
-                    total: {
-                      $set: resources.cardboard.total - scratchingPost.price,
-                    },
-                  },
-                });
-                props.setResources(newCardboard);
-                const newScratchingPost = update(buildings, {
-                  scratchingPost: { total: { $set: scratchingPost.total + 1 } },
-                });
-                newScratchingPost.scratchingPost.price += 5;
-                props.setBuildings(newScratchingPost);
+              if (cardboard.total >= scratchingPost.priceCardboard) {
+                setResources(currentCardboard=>{
+                  currentCardboard.cardboard.total = currentCardboard.cardboard.total - currentCardboard.scratchingPost.priceCardboard;
+                  currentCardboard.scratchingPost.priceCardboard += 5;
+                  return currentCardboard;
+                })
                 props.prtLog("You have bought a scratching pole");
               } else {
                 props.prtLog("You can't afford a scratching pole");
@@ -60,19 +50,12 @@ export const Buildings = (props) => {
               onClick={() => {
                 console.log("Button Pressed");
                 console.log(fishingPort.bought);
-                if (cardboard.total >= fishingPort.price) {
-                  const newCardboard = update(resources, {
-                    cardboard: {
-                      total: {
-                        $set: resources.cardboard.total - fishingPort.price,
-                      },
-                    },
-                  });
-                  props.setResources(newCardboard);
-                  const newFishingPort = update(buildings, {
-                    fishingPort: { bought: { $set: true } },
-                  });
-                  props.setBuildings(newFishingPort);
+                if (cardboard.total >= fishingPort.priceCardboard) {
+                  setResources(currentCardboard=>{
+                    currentCardboard.cardboard.total = currentCardboard.cardboard.total - currentCardboard.fishingPort.priceCardboard;
+                    currentCardboard.fishingPort.bought = true;
+                    return currentCardboard;
+                  })
                   props.prtLog("You have bought the fishing post");
                 } else {
                   props.prtLog("You can't afford the fishing port");
@@ -99,19 +82,12 @@ export const Buildings = (props) => {
               onClick={() => {
                 console.log("Button Pressed");
                 console.log(barracks.bought);
-                if (cardboard.total >= barracks.price) {
-                  const newCardboard = update(resources, {
-                    cardboard: {
-                      total: {
-                        $set: resources.cardboard.total - barracks.price,
-                      },
-                    },
-                  });
-                  props.setResources(newCardboard);
-                  const newBarracks = update(buildings, {
-                    barracks: { bought: { $set: true } },
-                  });
-                  props.setBuildings(newBarracks);
+                if (cardboard.total >= barracks.priceCardboard) {
+                  setResources(currentCardboard=>{
+                    currentCardboard.cardboard.total = currentCardboard.cardboard.total - currentCardboard.barracks.priceCardboard;
+                    currentCardboard.barracks.bought = true;
+                    return currentCardboard;
+                  })
                   props.prtLog("You have bought the barracks");
                 } else {
                   props.prtLog("You can't afford the barracks");

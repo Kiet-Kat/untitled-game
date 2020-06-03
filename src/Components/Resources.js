@@ -3,8 +3,8 @@ import { Row, Col, Button } from "react-bootstrap";
 import update from 'immutability-helper';
 
 export const Resources = props => {
-  const { fish, yarn, cardboard } = props.resources;
-  const {resources} = props;
+  const {resources} = props
+  const { fish, yarn, cardboard } = props.resources;  
   //console.log(props.resources);
 
   return (
@@ -18,12 +18,8 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            // const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
-            // props.setResources(newFish);
-            props.setResources(currentFish=>{
-              currentFish.fish.total++;
-              return currentFish;
-            });
+             const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
+             props.updateState(newFish);
           }}
         >
           Gather Fish
@@ -39,12 +35,8 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            // const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
-            // props.setResources(newYarn);
-            props.setResources(currentYarn=>{
-              currentYarn.yarn.total++;
-              return currentYarn;
-            });
+            const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
+            props.updateState(newYarn);
           }}
         >
           Make Yarn
@@ -60,12 +52,8 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            // const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
-            // props.setResources(newCardboard);
-            props.setResources(currentCardboard=>{
-              currentCardboard.cardboard.total++;
-              return currentCardboard;
-            });
+              const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
+              props.updateState(newCardboard);
           }}
         >
           Collect Cardboard
