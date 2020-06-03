@@ -1,11 +1,9 @@
 import update from 'immutability-helper';
 
-export const IncrementLogic = (resources, setResources) => {
-    const tempResources = update(resources, {fish: {total: {$set: resources.fish.total}}});
-    
+export const IncrementLogic = () => {
+    //const {fish, yarn, cardboard} = localResource;
     //increment resources
-    tempResources.fish.total += tempResources.fish.increment;
-    tempResources.yarn.total += tempResources.yarn.increment;
-    tempResources.cardboard.total += tempResources.cardboard.increment;
-    setResources(tempResources);
+    localResource.fish.total += localResource.fish.increment;
+    localResource.yarn.total += localResource.yarn.increment;
+    localResource.cardboard.total += localResource.cardboard.increment;
 }

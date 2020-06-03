@@ -12,7 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 export const App = () => {
-  const [resources, setResources] = useLocalStorage("resources", {
+  const localStorage = window.localStorage.getItem("resources");
+  var localResource = localStorage ? JSON.parse(localStorage) : {
     fish: {
       increment: 1,
       total: 0,
@@ -26,7 +27,9 @@ export const App = () => {
         total: 0
       },
       txtLog: [],
-  });
+  };
+  
+  const [resources, setResources] = useLocalStorage("resources", localResource);
   
   const [buildings, setBuildings] = useLocalStorage("buildings",
     {
@@ -48,18 +51,22 @@ export const App = () => {
   var prtLog = (message) => {
     var d = new Date();
     var msg = "[" + formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()) + ":" + formatTime(d.getSeconds()) + "]: " + message;
-    const addMsg = update(resources, { txtLog: { $push: [msg] } });
-    if (addMsg.txtLog.length > 5) addMsg.txtLog.shift(); //remove first element in array
-    setResources(addMsg);
+    localResource.txtLog.push(msg);
+    if (localResource.txtLog.length > 5) localResource.txtLog.shift(); //remove first element in array
+    setResources(localResource);
   };
 
-  //stop increment on window close
-    window.addEventListener("beforeunload", e =>{
-      clearInterval(interval);
-    });
+  useEffect(() =>{
+    //update local storage every second
+    const interval = setInterval(()=>{
+      IncrementLogic();
+      // setResources(localResource);
+    }, 1000);
 
-  //run increment every second
-  const interval = window.setInterval(()=>IncrementLogic(resources, setResources), 5000);;
+    //stop increment on component unload
+    return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
 
   return (
     <React.Fragment>
@@ -72,7 +79,7 @@ export const App = () => {
         </Row>
         <Row className="textLog">
           <Col>
-            {[...resources.txtLog].reverse().map((item, index) => (
+            {[...localResource.txtLog].reverse().map((item, index) => (
               <p className={"msgLog"} id={"msgLog"+index} key={index}>{item}</p>
             ))}
           </Col>
@@ -89,7 +96,7 @@ export const App = () => {
 
         <Row>
           <Col md={5} className="secResources">
-            <Resources resources={resources} setResources={setResources} />
+            <Resources localResource={localResource} setResources={setResources} />
           </Col>
 
           <Col md={2}></Col>
