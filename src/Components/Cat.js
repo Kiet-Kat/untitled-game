@@ -3,8 +3,8 @@ import { Row, Col, Button } from "react-bootstrap";
 import update from 'immutability-helper';
 
 export const Cat = props => {
-    const {resources} = props
-    const { fish, yarn, cardboard, scratchingPost, fishingPort, barracks, basicCat, fisherCat } = props.resources;  
+  const {resources} = props
+  const { fish, yarn, cardboard, scratchingPost, fishingPort, barracks, basicCat, fisherCat } = props.resources;  
 
   return (
     <React.Fragment>
@@ -17,7 +17,7 @@ export const Cat = props => {
           <span style={{ float: "left" }}>Fish{" "}</span>
         </Col>
         <Col md = {3}>
-  <span style={{ float: "left" }}>{resources.basicCat.total} Owned</span>
+          <span style={{ float: "left" }}>{resources.basicCat.total} Owned</span>
         </Col>
         <Col>
         <Button
@@ -37,7 +37,6 @@ export const Cat = props => {
         </Button>
       </Col>
       </Row>
-
       <Row>
         <Col md={5}>
           Fisher Cat{" "}

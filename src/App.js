@@ -7,6 +7,7 @@ import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
 import Cat from "./Components/Cat";
 import Buildings from "./Components/Buildings";
+import Training from "./Components/Training";
 import {IncrementLogic} from './Components/IncrementLogic';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -47,6 +48,7 @@ export default class App extends Component {
       },
       fisherCat:{
         total: 0,
+        priceYarn: 10,
         increment: 1,
       },
       txtLog: [],
@@ -134,7 +136,7 @@ export default class App extends Component {
           <Col md={2}></Col>
 
           <Col md={5} className="secTraining">
-            PLACEHOLDER
+            <Training resources={this.state} updateState={this.updateState} /> 
           </Col>
         </Row>
       </Container>

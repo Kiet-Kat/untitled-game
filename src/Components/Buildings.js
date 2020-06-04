@@ -10,11 +10,16 @@ export const Buildings = props => {
     <React.Fragment>
     <Row>
       <Col md={5}>
-        Scratching Post{" "}
-        <span style={{ float: "right" }}>{resources.scratchingPost.priceCardboard}</span>
-      </Col>
-      <Col>
-        <span style={{ float: "left" }}>Cardboard</span>
+          Scratching Post{" "}
+          <span style={{ float: "right" }}>{resources.scratchingPost.priceCardboard}</span>
+        </Col>
+        <Col md={3}>
+          <span style={{ float: "left" }}>Cardboard{" "}</span>
+        </Col>
+        <Col md = {3}>
+          <span style={{ float: "left" }}>{resources.scratchingPost.total} Built</span>
+        </Col>
+        <Col>
         <Button
           variant="secondary"
           className="btnBuildings"
@@ -35,6 +40,7 @@ export const Buildings = props => {
       </Col>
     </Row>
 
+    {!resources.fishingPort.bought && (
     <Row>
       <Col md={5}>
         Fishing Port{" "}
@@ -42,7 +48,6 @@ export const Buildings = props => {
       </Col>
       <Col>
         <span style={{ float: "left" }}>Cardboard</span>
-        {!resources.fishingPort.bought && (
           <Button
             variant="secondary"
             className="btnBuildings"
@@ -62,11 +67,12 @@ export const Buildings = props => {
           >
             Build
           </Button>
-        )}
-        {resources.fishingPort.bought && <h2 style={{ float: "right" }}> Bought </h2>}
+        
       </Col>
     </Row>
+    )}
 
+    {!resources.barracks.bought && (
     <Row>
       <Col md={5}>
         Barracks{" "}
@@ -74,7 +80,6 @@ export const Buildings = props => {
       </Col>
       <Col>
         <span style={{ float: "left" }}>Cardboard</span>
-        {!resources.barracks.bought && (
           <Button
             variant="secondary"
             className="btnBuildings"
@@ -94,10 +99,9 @@ export const Buildings = props => {
           >
             Build
           </Button>
-        )}
-        {resources.barracks.bought && <h2 style={{ float: "right" }}> Bought </h2>}
       </Col>
     </Row>
+    )}
     </React.Fragment>
   );
 }
