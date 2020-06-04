@@ -24,23 +24,23 @@ export default class App extends Component {
         increment: 0,
         total: 0,
       },
-        cardboard: {
-          increment: 0,
-          total: 0
-        },
-        scratchingPost:{
-          priceCardboard: 5,
-          total: 0
-        },
-        fishingPort:{
-          priceCardboard: 15,
-          bought: false
-        },
-        barracks:{
-          priceCardboard: 50,
-          bought: false
-        },
-        txtLog: [],
+      cardboard: {
+        increment: 0,
+        total: 0,
+      },
+      scratchingPost:{
+        priceCardboard: 5,
+        total: 0,
+      },
+      fishingPort:{
+        priceCardboard: 15,
+        bought: false,
+      },
+      barracks:{
+        priceCardboard: 50,
+        bought: false,
+      },
+      txtLog: [],
     };
   }
 
@@ -119,7 +119,7 @@ export default class App extends Component {
 
       <Row>
         <Col md={5} className="secBuildings">
-          <Buildings resources={this.state} setResources={this.setState} prtLog={this.prtLog}/>
+          <Buildings resources={this.state} updateState={this.updateState} /*prtLog={this.prtLog}*//>
         </Col>
 
         <Col md={2}></Col>
