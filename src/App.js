@@ -5,6 +5,7 @@ import useLocalStorage from "./Components/LocalStorageHook";
 
 import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
+import Cat from "./Components/Cat";
 import Buildings from "./Components/Buildings";
 import {IncrementLogic} from './Components/IncrementLogic';
 
@@ -17,7 +18,7 @@ export default class App extends Component {
     super(props);
     this.state = localStorage.getItem("resources") ? JSON.parse(localStorage.getItem("resources")) : {
       fish: {
-        increment: 1,
+        increment: 0,
         total: 0,
       },
       yarn: {
@@ -39,6 +40,14 @@ export default class App extends Component {
       barracks:{
         priceCardboard: 50,
         bought: false,
+      },
+      basicCat:{
+        priceFish: 10,
+        total: 0,
+      },
+      fisherCat:{
+        total: 0,
+        increment: 1,
       },
       txtLog: [],
     };
@@ -103,33 +112,32 @@ export default class App extends Component {
           </Col>
 
           <Col md={2}></Col>
-        <Col md={5} className="secCats">
-          PLACEHOLDER
-        </Col>
-      </Row>
+          <Col md={5} className="secCats">
+            <Cat resources={this.state} updateState={this.updateState} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md={7}>
-          <h3>Buildings:</h3>
-        </Col>
-        <Col>
-          <h3>Training:</h3>
-        </Col>
-      </Row>
+        <Row>
+          <Col md={7}>
+            <h3>Buildings:</h3>
+          </Col>
+          <Col>
+            <h3>Training:</h3>
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md={5} className="secBuildings">
-          <Buildings resources={this.state} updateState={this.updateState} /*prtLog={this.prtLog}*//>
-        </Col>
+        <Row>
+          <Col md={5} className="secBuildings">
+            <Buildings resources={this.state} updateState={this.updateState} /*prtLog={this.prtLog}*//>
+          </Col>
 
-        <Col md={2}></Col>
+          <Col md={2}></Col>
 
-        <Col md={5} className="secTraining">
-          PLACEHOLDER
-        </Col>
-      </Row>
-
-    </Container>
+          <Col md={5} className="secTraining">
+            PLACEHOLDER
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
     )
   }

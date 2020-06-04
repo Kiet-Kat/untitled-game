@@ -66,7 +66,7 @@ export const Buildings = props => {
         {resources.fishingPort.bought && <h2 style={{ float: "right" }}> Bought </h2>}
       </Col>
     </Row>
-    
+
     <Row>
       <Col md={5}>
         Barracks{" "}
@@ -100,6 +100,6 @@ export const Buildings = props => {
     </Row>
     </React.Fragment>
   );
-};
+}
 
 export default Buildings;
