@@ -11,17 +11,18 @@ export const Buildings = props => {
     <Row>
       <Col md={5}>
         Scratching Post{" "}
-        <span style={{ float: "right" }}>{resources.scratchingPost.total}</span>
+        <span style={{ float: "right" }}>{resources.scratchingPost.priceCardboard}</span>
       </Col>
       <Col>
-        <span style={{ float: "left" }}>Bought</span>
+        <span style={{ float: "left" }}>Cardboard</span>
         <Button
           variant="secondary"
           className="btnBuildings"
           onClick={() => {
           if (resources.cardboard.total >= resources.scratchingPost.priceCardboard) {
-            const newScratchingPost = update(resources, {scratchingPost: {total: {$set: resources.scratchingPost.total + 1}}, 
-              cardboard: {total: {$set: resources.cardboard.total - resources.scratchingPost.priceCardboard}}});
+            const newScratchingPost = update(resources, {cardboard: {total: {$set: resources.cardboard.total - resources.scratchingPost.priceCardboard}},
+              scratchingPost: {total: {$set: resources.scratchingPost.total + 1}, priceCardboard: {$set: resources.scratchingPost.priceCardboard + 5}}, 
+            });
             props.updateState(newScratchingPost);
             //props.prtLog("You have bought a scratching post");
           } else {
@@ -33,6 +34,7 @@ export const Buildings = props => {
         </Button>
       </Col>
     </Row>
+
     <Row>
       <Col md={5}>
         Fishing Port{" "}
@@ -49,7 +51,8 @@ export const Buildings = props => {
               console.log(fishingPort.bought);
               if (resources.cardboard.total >= resources.fishingPort.priceCardboard) {
                 const newFishingPort = update(resources, {fishingPort: {bought: {$set: true}},
-                  cardboard: {total: {$set: resources.cardboard.total - resources.fishingPort.priceCardboard}}});
+                  cardboard: {total: {$set: resources.cardboard.total - resources.fishingPort.priceCardboard}}
+                });
                 props.updateState(newFishingPort);
                 //props.prtLog("You have bought the fishing post");
               } else {
@@ -63,6 +66,7 @@ export const Buildings = props => {
         {resources.fishingPort.bought && <h2 style={{ float: "right" }}> Bought </h2>}
       </Col>
     </Row>
+    
     <Row>
       <Col md={5}>
         Barracks{" "}
@@ -79,7 +83,8 @@ export const Buildings = props => {
               console.log(barracks.bought);
               if (cardboard.total >= barracks.priceCardboard) {
                 const newBarracks = update(resources, {barracks: {bought: {$set: true}},
-                  cardboard: {total: {$set: resources.cardboard.total - resources.barracks.priceCardboard}}});
+                  cardboard: {total: {$set: resources.cardboard.total - resources.barracks.priceCardboard}}
+                });
                 props.updateState(newBarracks);
                 //props.prtLog("You have bought the barracks");
               } else {
