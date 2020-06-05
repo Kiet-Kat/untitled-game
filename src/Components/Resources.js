@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 
 export const Resources = props => {
-  const {resources} = props
   const { fish, yarn, cardboard } = props.resources;  
   //console.log(props.resources);
 
