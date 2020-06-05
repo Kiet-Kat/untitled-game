@@ -57,22 +57,25 @@ export default class App extends Component {
 
   //function to update state
   updateState = resources =>{
+    if (resources.txtLog.length > 5) resources.txtLog.shift(); //remove first element in textlog array
     this.setState(resources);
   }
 
-  //function to print message to log
+  //function returns array with new prgLog message
   prtLog = message => {
     var d = new Date();
     var msg = "[" + formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()) + ":" + formatTime(d.getSeconds()) + "]: " + message;
     const addMsg = update(this.state, { txtLog: { $push: [msg] } });
-    if (addMsg.txtLog.length > 5) addMsg.txtLog.shift(); //remove first element in array
-    this.setState(addMsg);
+    return addMsg;
   }
 
+  //return editable copy of current state
+  currentResources = () =>{ return update(this.state, {fish: {total: {$set: this.state.fish.total}}}) }
+
   componentDidMount(){
-    this.prtLog("Game has loaded");
+    this.setState(this.prtLog("Game has loaded"));
     this.interval = setInterval(()=>{
-      IncrementLogic(this.state, this.updateState);
+      IncrementLogic(this.currentResources(), this.updateState);
       localStorage.setItem("resources", JSON.stringify(this.state));
     },1000);
   }
@@ -88,7 +91,7 @@ export default class App extends Component {
       <Container>
         <Row>
           <Col>
-            <h3 onClick={() => this.prtLog("test")}>Logs:</h3>
+            <h3 onClick={() => this.updateState(this.prtLog("test"))}>Logs:</h3>
           </Col>
         </Row>
         <Row className="textLog">
@@ -110,7 +113,7 @@ export default class App extends Component {
 
         <Row>
           <Col md={5} className="secResources">
-            <Resources resources={this.state} updateState={this.updateState} />
+            <Resources resources={this.state} updateState={this.updateState} currentResources={this.currentResources} />
           </Col>
 
           <Col md={2}></Col>
@@ -130,7 +133,7 @@ export default class App extends Component {
 
         <Row>
           <Col md={5} className="secBuildings">
-            <Buildings resources={this.state} updateState={this.updateState} /*prtLog={this.prtLog}*//>
+            <Buildings resources={this.state} updateState={this.updateState} prtLog={this.prtLog}/>
           </Col>
 
           <Col md={2}></Col>

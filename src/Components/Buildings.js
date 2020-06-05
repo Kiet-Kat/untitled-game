@@ -25,13 +25,14 @@ export const Buildings = props => {
           className="btnBuildings"
           onClick={() => {
           if (resources.cardboard.total >= resources.scratchingPost.priceCardboard) {
-            const newScratchingPost = update(resources, {cardboard: {total: {$set: resources.cardboard.total - resources.scratchingPost.priceCardboard}},
-              scratchingPost: {total: {$set: resources.scratchingPost.total + 1}, priceCardboard: {$set: resources.scratchingPost.priceCardboard + 5}}, 
-            });
+            const newScratchingPost = props.prtLog("You have bought a scratching post");
+            newScratchingPost.cardboard.total -= newScratchingPost.scratchingPost.priceCardboard;
+            newScratchingPost.scratchingPost.total++;
+            newScratchingPost.scratchingPost.priceCardboard += 5;
             props.updateState(newScratchingPost);
-            //props.prtLog("You have bought a scratching post");
+
           } else {
-            //props.prtLog("You can't afford a scratching post");
+            props.updateState(props.prtLog("You can't afford a scratching post"));
           }
         }}
         >
@@ -59,9 +60,9 @@ export const Buildings = props => {
                   cardboard: {total: {$set: resources.cardboard.total - resources.fishingPort.priceCardboard}}
                 });
                 props.updateState(newFishingPort);
-                //props.prtLog("You have bought the fishing post");
+                props.prtLog("You have bought the fishing post");
               } else {
-                //props.prtLog("You can't afford the fishing port");
+                props.prtLog("You can't afford the fishing port");
               }
             }}
           >
@@ -91,9 +92,9 @@ export const Buildings = props => {
                   cardboard: {total: {$set: resources.cardboard.total - resources.barracks.priceCardboard}}
                 });
                 props.updateState(newBarracks);
-                //props.prtLog("You have bought the barracks");
+                props.prtLog("You have bought the barracks");
               } else {
-                //props.prtLog("You can't afford the barracks");
+                props.prtLog("You can't afford the barracks");
               }
             }}
           >

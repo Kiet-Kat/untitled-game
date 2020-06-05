@@ -18,7 +18,9 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-             const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
+             //const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
+             const newFish = props.currentResources();
+             newFish.fish.total++;
              props.updateState(newFish);
           }}
         >
@@ -35,7 +37,9 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-            const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
+            //const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
+            const newYarn = props.currentResources();
+            newYarn.yarn.total++;
             props.updateState(newYarn);
           }}
         >
@@ -52,7 +56,9 @@ export const Resources = props => {
           variant="secondary"
           className="btnResource"
           onClick={() => {
-              const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
+              //const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
+              const newCardboard = props.currentResources();
+              newCardboard.cardboard.total++;
               props.updateState(newCardboard);
           }}
         >
