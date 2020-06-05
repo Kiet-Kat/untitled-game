@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import update from 'immutability-helper';
 
 export const Resources = props => {
   const {resources} = props

@@ -30,7 +30,6 @@ export const Buildings = props => {
             newScratchingPost.scratchingPost.total++;
             newScratchingPost.scratchingPost.priceCardboard += 5;
             props.updateState(newScratchingPost);
-
           } else {
             props.updateState(props.prtLog("You can't afford a scratching post"));
           }
@@ -56,13 +55,12 @@ export const Buildings = props => {
               console.log("Button Pressed");
               console.log(fishingPort.bought);
               if (resources.cardboard.total >= resources.fishingPort.priceCardboard) {
-                const newFishingPort = update(resources, {fishingPort: {bought: {$set: true}},
-                  cardboard: {total: {$set: resources.cardboard.total - resources.fishingPort.priceCardboard}}
-                });
+                const newFishingPort = props.prtLog("You have bought the fishing post");;
+                newFishingPort.fishingPort.bought = true;
+                newFishingPort.cardboard.total -= newFishingPort.fishingPort.priceCardboard;
                 props.updateState(newFishingPort);
-                props.prtLog("You have bought the fishing post");
               } else {
-                props.prtLog("You can't afford the fishing port");
+                props.updateState(props.prtLog("You can't afford the fishing port"));
               }
             }}
           >
@@ -88,13 +86,12 @@ export const Buildings = props => {
               console.log("Button Pressed");
               console.log(barracks.bought);
               if (cardboard.total >= barracks.priceCardboard) {
-                const newBarracks = update(resources, {barracks: {bought: {$set: true}},
-                  cardboard: {total: {$set: resources.cardboard.total - resources.barracks.priceCardboard}}
-                });
+                const newBarracks = props.prtLog("You have bought the barracks");
+                newBarracks.barracks.bought = true;
+                newBarracks.cardboard.total -= newBarracks.barracks.priceCardboard;
                 props.updateState(newBarracks);
-                props.prtLog("You have bought the barracks");
               } else {
-                props.prtLog("You can't afford the barracks");
+                props.updateState(props.prtLog("You can't afford the barracks"));
               }
             }}
           >
