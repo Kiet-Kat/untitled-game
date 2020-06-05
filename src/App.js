@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from "react-bootstrap";
 import update from "immutability-helper";
-import useLocalStorage from "./Components/LocalStorageHook";
 
 import Navbar from "./Components/Navbar";
 import Resources from "./Components/Resources";
+import Cat from "./Components/Cat";
 import Buildings from "./Components/Buildings";
+import Training from "./Components/Training";
 import {IncrementLogic} from './Components/IncrementLogic';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,51 +18,63 @@ export default class App extends Component {
     super(props);
     this.state = localStorage.getItem("resources") ? JSON.parse(localStorage.getItem("resources")) : {
       fish: {
-        increment: 1,
+        increment: 0,
         total: 0,
       },
       yarn: {
         increment: 0,
         total: 0,
       },
-        cardboard: {
-          increment: 0,
-          total: 0
-        },
-        scratchingPost:{
-          priceCardboard: 5,
-          total: 0
-        },
-        fishingPort:{
-          priceCardboard: 15,
-          bought: false
-        },
-        barracks:{
-          priceCardboard: 50,
-          bought: false
-        },
-        txtLog: [],
+      cardboard: {
+        increment: 0,
+        total: 0,
+      },
+      scratchingPost:{
+        priceCardboard: 5,
+        total: 0,
+      },
+      fishingPort:{
+        priceCardboard: 15,
+        bought: false,
+      },
+      barracks:{
+        priceCardboard: 50,
+        bought: false,
+      },
+      basicCat:{
+        priceFish: 10,
+        total: 0,
+      },
+      fisherCat:{
+        total: 0,
+        priceYarn: 10,
+        increment: 1,
+      },
+      txtLog: [],
     };
   }
 
   //function to update state
   updateState = resources =>{
+    if (resources.txtLog.length > 5) resources.txtLog.shift(); //remove first element in textlog array
     this.setState(resources);
   }
 
-  //function to print message to log
+  //function returns array with new prgLog message
   prtLog = message => {
     var d = new Date();
     var msg = "[" + formatTime(d.getHours()) + ":" + formatTime(d.getMinutes()) + ":" + formatTime(d.getSeconds()) + "]: " + message;
     const addMsg = update(this.state, { txtLog: { $push: [msg] } });
-    if (addMsg.txtLog.length > 5) addMsg.txtLog.shift(); //remove first element in array
-    this.setState(addMsg);
+    return addMsg;
   }
 
+  //return editable copy of current state
+  currentResources = () =>{ return update(this.state, {fish: {total: {$set: this.state.fish.total}}}) }
+
   componentDidMount(){
-    this.prtLog("Game has loaded");
+    this.setState(this.prtLog("Game has loaded"));
     this.interval = setInterval(()=>{
-      IncrementLogic(this.state, this.updateState);
+      IncrementLogic(this.currentResources(), this.updateState);
       localStorage.setItem("resources", JSON.stringify(this.state));
     },1000);
   }
@@ -77,7 +90,7 @@ export default class App extends Component {
       <Container>
         <Row>
           <Col>
-            <h3 onClick={() => this.prtLog("test")}>Logs:</h3>
+            <h3 onClick={() => this.updateState(this.prtLog("test"))}>Logs:</h3>
           </Col>
         </Row>
         <Row className="textLog">
@@ -99,37 +112,36 @@ export default class App extends Component {
 
         <Row>
           <Col md={5} className="secResources">
-            <Resources resources={this.state} updateState={this.updateState} />
+            <Resources resources={this.state} updateState={this.updateState} currentResources={this.currentResources} />
           </Col>
 
           <Col md={2}></Col>
-        <Col md={5} className="secCats">
-          PLACEHOLDER
-        </Col>
-      </Row>
+          <Col md={5} className="secCats">
+            <Cat resources={this.state} updateState={this.updateState} />
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md={7}>
-          <h3>Buildings:</h3>
-        </Col>
-        <Col>
-          <h3>Training:</h3>
-        </Col>
-      </Row>
+        <Row>
+          <Col md={7}>
+            <h3>Buildings:</h3>
+          </Col>
+          <Col>
+            <h3>Training:</h3>
+          </Col>
+        </Row>
 
-      <Row>
-        <Col md={5} className="secBuildings">
-          <Buildings resources={this.state} setResources={this.setState} prtLog={this.prtLog}/>
-        </Col>
+        <Row>
+          <Col md={5} className="secBuildings">
+            <Buildings resources={this.state} updateState={this.updateState} prtLog={this.prtLog}/>
+          </Col>
 
-        <Col md={2}></Col>
+          <Col md={2}></Col>
 
-        <Col md={5} className="secTraining">
-          PLACEHOLDER
-        </Col>
-      </Row>
-
-    </Container>
+          <Col md={5} className="secTraining">
+            <Training resources={this.state} updateState={this.updateState} /> 
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
     )
   }
