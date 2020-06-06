@@ -1,71 +1,61 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
 
-export const Resources = props => {
-  const { fish, yarn, cardboard } = props.resources;  
+export const Resources = (props) => {
+  const { fish, yarn, cardboard } = props.resources;
   //console.log(props.resources);
 
   return (
-    <React.Fragment>
-    <Row>
-      <Col md={4}>
-        Fish: <span style={{ float: "right" }}>{fish.total}</span>
-      </Col>
-      <Col>
-        <Button
-          variant="secondary"
-          className="btnResource"
-          onClick={() => {
-             //const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
-             const newFish = props.currentResources();
-             newFish.fish.total++;
-             props.updateState(newFish);
-          }}
-        >
-          Gather Fish
-        </Button>
-      </Col>
-    </Row>
-    <Row style={{ paddingTop: "5px" }}>
-      <Col md={4}>
-        Yarn: <span style={{ float: "right" }}>{yarn.total}</span>
-      </Col>
-      <Col>
-        <Button
-          variant="secondary"
-          className="btnResource"
-          onClick={() => {
-            //const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
-            const newYarn = props.currentResources();
-            newYarn.yarn.total++;
-            props.updateState(newYarn);
-          }}
-        >
-          Make Yarn
-        </Button>
-      </Col>
-    </Row>
-    <Row style={{ paddingTop: "5px" }}>
-      <Col md={4}>
-        Cardboard: <span style={{ float: "right" }}>{cardboard.total}</span>
-      </Col>
-      <Col>
-        <Button
-          variant="secondary"
-          className="btnResource"
-          onClick={() => {
-              //const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
-              const newCardboard = props.currentResources();
-              newCardboard.cardboard.total++;
-              props.updateState(newCardboard);
-          }}
-        >
-          Collect Cardboard
-        </Button>
-      </Col>
-    </Row>
-  </React.Fragment>
-  )
-}
+    <div className="flexSection">
+      <div id="rowFish">
+        <span>Fish:</span> <span>{fish.total}</span>
+        <span>
+          <button
+            className="btnPrimary"
+            onClick={() => {
+              //const newFish = update(resources, {fish: {total: {$set: resources.fish.total + 1}}});
+              const newFish = props.currentResources();
+              newFish.fish.total++;
+              props.updateState(newFish);
+            }}
+          >
+            Gather Fish
+          </button>
+        </span>
+      </div>
+      <div id="rowYarn">
+          <span>Yarn:</span> <span>{yarn.total}</span>
+          <span>
+            <button
+              className="btnPrimary"
+              onClick={() => {
+                //const newYarn = update(resources, {yarn: {total: {$set: resources.yarn.total + 1}}});
+                const newYarn = props.currentResources();
+                newYarn.yarn.total++;
+                props.updateState(newYarn);
+              }}
+            >
+              Make Yarn
+            </button>
+          </span>
+      </div>
+      <div id="rowCardboard">
+          <span>Cardboard:</span> <span>{cardboard.total}</span>
+          <span>
+            <button
+              className="btnPrimary"
+              onClick={() => {
+                //const newCardboard = update(resources, {cardboard: {total: {$set: resources.cardboard.total + 1}}});
+                const newCardboard = props.currentResources();
+                newCardboard.cardboard.total++;
+                props.updateState(newCardboard);
+              }}
+            >
+              Get Cardboard
+            </button>
+          </span>
+      </div>
+    </div>
+  );
+};
 
 export default Resources;
