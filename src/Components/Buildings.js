@@ -11,19 +11,15 @@ export const Buildings = (props) => {
     barracks,
   } = props.resources;
 
-  const getDisabled = (fishCost, yarnCost, cardboardCost)=>{
-    return (fish.total >= fishCost && yarn.total >= yarnCost && cardboard.total >= cardboardCost) ? false: true;
-  }
-
   return (
     <div className="flexSection">
       <div id="rowScratchingPost">
         <span style={{ flex: "30%" }}>Scratching Post: </span>
-        <span style={{ flex: "10%" }}>{resources.scratchingPost.total}</span>
+        <span style={{ flex: "40%" }}>{resources.scratchingPost.total}</span>
         <span style={{ flex: "30%" }}>
           <button
             className="btnPrimary"
-            disabled={getDisabled(0,0,scratchingPost.priceCardboard)}
+            disabled={props.getDisabled(0,0,scratchingPost.priceCardboard)}
             onClick={() => {
               if (
                 cardboard.total >=
@@ -51,7 +47,8 @@ export const Buildings = (props) => {
         <span style={{ flex: "60%", fontStyle: "italic", opacity: ".7" }}>
           {resources.scratchingPost.priceCardboard} Cardboard
         </span>
-        <span style={{ flex: "40%", fontStyle: "italic", opacity: ".7" }}>
+        <span style={{flex: "10%"}}></span>
+        <span style={{ flex: "30%", fontStyle: "italic", opacity: ".7" }}>
           +5 population
         </span>
       </div>
@@ -59,11 +56,11 @@ export const Buildings = (props) => {
       {!resources.fishingPort.bought && (
         <div id="rowFishingPort">
           <span style={{ flex: "30%" }}>Fishing Port: </span>
-          <span style={{ flex: "10%" }}></span>
+          <span style={{ flex: "40%" }}></span>
           <span style={{ flex: "30%" }}>
             <button
               className="btnPrimary"
-              disabled={getDisabled(0,0,fishingPort.priceCardboard)}
+              disabled={props.getDisabled(0,0,fishingPort.priceCardboard)}
               onClick={() => {
                 console.log("Button Pressed");
                 console.log(fishingPort.bought);
@@ -92,7 +89,8 @@ export const Buildings = (props) => {
           <span style={{ flex: "60%", fontStyle: "italic", opacity: ".7" }}>
             {fishingPort.priceCardboard} Cardboard
           </span>
-          <span style={{ flex: "40%", fontStyle: "italic", opacity: ".7" }}>
+          <span style={{flex: "10%"}}></span>
+          <span style={{ flex: "30%", fontStyle: "italic", opacity: ".7" }}>
             Unlock fishing cats
           </span>
         </div>
@@ -101,11 +99,11 @@ export const Buildings = (props) => {
       {!resources.barracks.bought && (
         <div id="rowBarracks">
           <span style={{ flex: "30%" }}>Barracks: </span>
-          <span style={{ flex: "10%" }}></span>
+          <span style={{ flex: "40%" }}></span>
           <span style={{ flex: "30%" }}>
             <button
               className="btnPrimary"
-              disabled={getDisabled(0,0,barracks.priceCardboard)}
+              disabled={props.getDisabled(0,0,barracks.priceCardboard)}
               onClick={() => {
                 console.log("Button Pressed");
                 console.log(barracks.bought);
@@ -131,7 +129,8 @@ export const Buildings = (props) => {
           <span style={{ flex: "60%", fontStyle: "italic", opacity: ".7" }}>
             {barracks.priceCardboard} Cardboard
           </span>
-          <span style={{ flex: "40%", fontStyle: "italic", opacity: ".7" }}>
+          <span style={{flex: "10%"}}></span>
+          <span style={{ flex: "10%", fontStyle: "italic", opacity: ".7" }}>
             Unlock warrior cats
           </span>
         </div>

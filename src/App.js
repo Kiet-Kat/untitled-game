@@ -83,6 +83,15 @@ export default class App extends Component {
     });
   };
 
+  //get if button disabled status
+  getDisabled = (fishCost, yarnCost, cardboardCost) => {
+    return this.state.fish.total >= fishCost &&
+      this.state.yarn.total >= yarnCost &&
+      this.state.cardboard.total >= cardboardCost
+      ? false
+      : true;
+  };
+
   componentDidMount() {
     this.setState(this.prtLog("Game has loaded"));
     this.interval = setInterval(() => {
@@ -126,7 +135,12 @@ export default class App extends Component {
             <h3>Cats:</h3>
           </div>
           <div className="gridElement" id="secCats">
-            <Cat resources={this.state} updateState={this.updateState} />
+            <Cat
+              resources={this.state}
+              updateState={this.updateState}
+              currentResources={this.currentResources}
+              getDisabled={this.getDisabled}
+            />
           </div>
 
           <div className="gridElement" id="HdrBuildings">
@@ -137,6 +151,7 @@ export default class App extends Component {
               resources={this.state}
               updateState={this.updateState}
               prtLog={this.prtLog}
+              getDisabled={this.getDisabled}
             />
           </div>
 
@@ -144,7 +159,7 @@ export default class App extends Component {
             <h3>Training:</h3>
           </div>
           <div className="gridElement" id="secTraining">
-            <Training resources={this.state} updateState={this.updateState} />
+            <Training resources={this.state} updateState={this.updateState} currentResources={this.currentResources}/>
           </div>
         </div>
       </React.Fragment>
