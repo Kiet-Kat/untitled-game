@@ -1,5 +1,3 @@
-import update from "immutability-helper";
-
 export const IncrementLogic = (currentResources, updateState) => {
   //increment resources
   currentResources.fish.total += currentResources.fish.increment;
