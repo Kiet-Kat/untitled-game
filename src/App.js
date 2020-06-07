@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import update from "immutability-helper";
 
 import Navbar from "./Components/Navbar";

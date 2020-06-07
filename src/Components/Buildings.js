@@ -11,11 +11,6 @@ export const Buildings = (props) => {
     barracks,
   } = props.resources;
 
-  const costStyle = {
-    fontStyle: "italic",
-    opacity: ".7",
-  };
-
   const getDisabled = (fishCost, yarnCost, cardboardCost)=>{
     return (fish.total >= fishCost && yarn.total >= yarnCost && cardboard.total >= cardboardCost) ? false: true;
   }
@@ -31,8 +26,8 @@ export const Buildings = (props) => {
             disabled={getDisabled(0,0,scratchingPost.priceCardboard)}
             onClick={() => {
               if (
-                resources.cardboard.total >=
-                resources.scratchingPost.priceCardboard
+                cardboard.total >=
+                scratchingPost.priceCardboard
               ) {
                 const newScratchingPost = props.prtLog(
                   "You have bought a scratching post"
