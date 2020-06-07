@@ -33,8 +33,8 @@ a {
   #mainComponent {
     width: 750px;
   }
-  #mainComponent{
-    grid-template-columns: 2fr 1fr 2fr;
+  #mainComponent {
+    grid-template-columns: 2fr 0.25fr 2fr;
   }
   #HdrLogs {
     grid-column: 1/4;
@@ -90,77 +90,61 @@ a {
 .gridElement {
   padding: 10px;
 }
-#HdrLogs {
-  width: 100%;
-}
-#textLog {
-  width: 100%;
-  border: solid;
-}
-#HdrResources {
-  width: 100%;
-}
-#secResources {
-  width: 100%;
-  border: solid;
-}
-#HdrCats {
-  width: 100%;
-  height: 100%;
-}
-#secCats {
-  width: 100%;
-  border: solid;
-}
-#HdrBuildings {
-  width: 100%;
-}
-#secBuildings {
-  width: 100%;
-  border: solid;
-}
+#HdrLogs,
+#HdrResources,
+#HdrCats,
+#HdrBuildings,
 #HdrTraining {
   width: 100%;
 }
+#textLog,
+#secResources,
+#secCats,
+#secBuildings,
 #secTraining {
   width: 100%;
   border: solid;
 }
 
-.flexSection{
+.flexSection {
   display: flex;
   flex-direction: column;
   margin: -5px 0;
 }
 
 /*Each row is now a flexbox*/
-.flexSection div{
-  display:flex;
+.flexSection div {
+  display: flex;
   flex-wrap: wrap;
   margin: 5px 0;
+  justify-content: space-between;
 }
-#rowFish span{
-  flex: 1;
-}
-#rowYarn span{
-  flex: 1;
-}
-#rowCardboard span{
+#rowFish span,
+#rowYarn span,
+#rowCardboard span {
   flex: 1;
 }
 
-.btnPrimary{
-  background-color:#4588c7;
-	border-radius:28px;
-	border:1px solid #4588c7;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
+.btnPrimary {
+  background-color: #4588c7;
+  border-radius: 28px;
+  border: 1px solid #4588c7;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
   width: 150px;
-	text-decoration:none;
+  text-decoration: none;
 }
-.btnPrimary:hover{
-  background-color:#61a8eb;
+.btnPrimary:hover {
+  background-color: #61a8eb;
+}
+
+.btnPrimary:disabled{
+  opacity: .6;
+}
+
+.btnPrimary:hover:disabled{
+  background-color: #4588c7;
 }
 
 .navbar-app {
