@@ -29,26 +29,39 @@ export default class App extends Component {
             increment: 0,
             total: 0,
           },
-          scratchingPost: {
-            priceCardboard: 5,
+          catnip:{
             total: 0,
+          },
+          scratchingPost: {
+            total: 0,
+            priceFish: 0,
+            priceYarn: 0,
+            priceCardboard: 5,
           },
           fishingPort: {
-            priceCardboard: 15,
             bought: false,
+            priceFish: 0,
+            priceYarn: 0,
+            priceCardboard: 15,
           },
           barracks: {
-            priceCardboard: 50,
             bought: false,
+            priceFish: 0,
+            priceYarn: 0,
+            priceCardboard: 50,
           },
           basicCat: {
-            priceFish: 10,
             total: 0,
+            priceFish: 50,
+            priceYarn: 0,
+            priceCardboard: 0,
           },
           fisherCat: {
             total: 0,
-            priceYarn: 10,
             increment: 1,
+            priceFish: 0,
+            priceYarn: 10,
+            priceCardboard: 0,
           },
           txtLog: [],
         };

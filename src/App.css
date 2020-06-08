@@ -121,7 +121,8 @@ a {
 }
 #rowFish span,
 #rowYarn span,
-#rowCardboard span {
+#rowCardboard span,
+#rowCatnip span {
   flex: 1;
 }
 
