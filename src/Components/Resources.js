@@ -7,13 +7,17 @@ export const Resources = (props) => {
   return (
     <div className="flexSection">
       <div id="rowFish">
-        <span>Fish:</span> <span>{fish.total}</span>
+        <span>Fish:</span> <span>{Math.trunc(fish.total)}</span>
         <span>
           <button
             className="btnPrimary"
             onClick={() => {
               const newFish = props.currentResources();
               newFish.fish.total++;
+              //chance for catnip
+              if (Math.random() < 0.1) {
+                newFish.catnip.total++;
+              }
               props.updateState(newFish);
             }}
           >
@@ -22,13 +26,17 @@ export const Resources = (props) => {
         </span>
       </div>
       <div id="rowYarn">
-        <span>Yarn:</span> <span>{yarn.total}</span>
+        <span>Yarn:</span> <span>{Math.trunc(yarn.total)}</span>
         <span>
           <button
             className="btnPrimary"
             onClick={() => {
               const newYarn = props.currentResources();
               newYarn.yarn.total++;
+              //chance for catnip
+              if (Math.random() < 0.1) {
+                newYarn.catnip.total++;
+              }
               props.updateState(newYarn);
             }}
           >
@@ -37,13 +45,17 @@ export const Resources = (props) => {
         </span>
       </div>
       <div id="rowCardboard">
-        <span>Cardboard:</span> <span>{cardboard.total}</span>
+        <span>Cardboard:</span> <span>{Math.trunc(cardboard.total)}</span>
         <span>
           <button
             className="btnPrimary"
             onClick={() => {
               const newCardboard = props.currentResources();
               newCardboard.cardboard.total++;
+              //chance for catnip
+              if (Math.random() < 0.1) {
+                newCardboard.catnip.total++;
+              }
               props.updateState(newCardboard);
             }}
           >
@@ -52,7 +64,7 @@ export const Resources = (props) => {
         </span>
       </div>
       <div id="rowCatnip">
-        <span>Catnip:</span> <span>{catnip.total}</span>
+        <span>Catnip:</span> <span>{Math.trunc(catnip.total)}</span>
         <span>
           {/* <button
             className="btnPrimary"

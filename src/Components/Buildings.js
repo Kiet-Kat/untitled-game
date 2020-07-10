@@ -19,7 +19,7 @@ export const Buildings = (props) => {
         <span style={{ flex: "30%" }}>
           <button
             className="btnPrimary"
-            disabled={props.getDisabled(0,0,scratchingPost.priceCardboard)}
+            disabled={props.getDisabled(scratchingPost.priceFish, scratchingPost.priceYarn ,scratchingPost.priceCardboard, scratchingPost.priceCatnip)}
             onClick={() => {
               if (
                 cardboard.total >=
@@ -60,7 +60,7 @@ export const Buildings = (props) => {
           <span style={{ flex: "30%" }}>
             <button
               className="btnPrimary"
-              disabled={props.getDisabled(0,0,fishingPort.priceCardboard)}
+              disabled={props.getDisabled(fishingPort.priceFish, fishingPort.priceYarn, fishingPort.priceCardboard, fishingPort.priceCatnip)}
               onClick={() => {
                 console.log("Button Pressed");
                 console.log(fishingPort.bought);
@@ -103,7 +103,7 @@ export const Buildings = (props) => {
           <span style={{ flex: "30%" }}>
             <button
               className="btnPrimary"
-              disabled={props.getDisabled(0,0,barracks.priceCardboard)}
+              disabled={props.getDisabled(barracks.priceFish, barracks.priceYarn, barracks.priceCardboard, barracks.priceCatnip)}
               onClick={() => {
                 console.log("Button Pressed");
                 console.log(barracks.bought);
@@ -130,7 +130,7 @@ export const Buildings = (props) => {
             {barracks.priceCardboard} Cardboard
           </span>
           <span style={{flex: "10%"}}></span>
-          <span style={{ flex: "10%", fontStyle: "italic", opacity: ".7" }}>
+          <span style={{ flex: "30%", fontStyle: "italic", opacity: ".7" }}>
             Unlock warrior cats
           </span>
         </div>

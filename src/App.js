@@ -37,24 +37,28 @@ export default class App extends Component {
             priceFish: 0,
             priceYarn: 0,
             priceCardboard: 5,
+            priceCatnip: 0
           },
           fishingPort: {
             bought: false,
             priceFish: 0,
             priceYarn: 0,
             priceCardboard: 15,
+            priceCatnip: 0
           },
           barracks: {
             bought: false,
             priceFish: 0,
             priceYarn: 0,
             priceCardboard: 50,
+            priceCatnip: 0
           },
           basicCat: {
             total: 0,
             priceFish: 50,
             priceYarn: 0,
             priceCardboard: 0,
+            priceCatnip: 0
           },
           fisherCat: {
             total: 0,
@@ -62,6 +66,7 @@ export default class App extends Component {
             priceFish: 0,
             priceYarn: 10,
             priceCardboard: 0,
+            priceCatnip: 5
           },
           txtLog: [],
         };
@@ -97,10 +102,11 @@ export default class App extends Component {
   };
 
   //get if button disabled status
-  getDisabled = (fishCost, yarnCost, cardboardCost) => {
+  getDisabled = (fishCost, yarnCost, cardboardCost, catnipCost) => {
     return this.state.fish.total >= fishCost &&
       this.state.yarn.total >= yarnCost &&
-      this.state.cardboard.total >= cardboardCost
+      this.state.cardboard.total >= cardboardCost &&
+      this.state.catnip.total >= catnipCost
       ? false
       : true;
   };
